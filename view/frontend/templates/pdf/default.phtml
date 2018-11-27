@@ -1,0 +1,131 @@
+<?php
+
+$logoSrc = $block->getLogoSrc();
+
+$product = $block->getProduct();
+
+$image = $block->getProductImageSrc($product);
+$price = $product->getData('price');
+
+$info1 = $product->getData('infoaggiuntive1');
+$info2 = $product->getData('infoaggiuntive2');
+
+
+?>
+<body>
+
+<style>
+    body {
+        font-family: 'Raleway', sans-serif;
+    }
+
+    @font-face {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: normal;
+        src: url(http://themes.googleusercontent.com/static/fonts/opensans/v8/cJZKeOuBrn4kERxqtaUH3aCWcynf_cDxXwCLxiixG1c.ttf) format('truetype');
+    }
+
+    .main-description > table {
+        width: 100% !important;
+    }
+
+    .main-description > h2 {
+        /*text-align: center;*/
+        font-weight: 100;
+        font-size: 14px;
+    }
+
+    .main-description img {
+        height: 100%;
+        max-height: 100px;
+        clear: both;
+    }
+
+    .main-description td {
+        overflow: hidden;
+    }
+</style>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Raleway');
+</style>
+
+<main id="content" style="font-family: 'Raleway', sans-serif;">
+    <section id="header" class="py-3">
+        <div class="container" style="margin-top: -30px; margin-bottom: 10px; border-bottom: 1px solid gray;">
+            <div class="logo col-md-12" style="width: 100%; text-align:center; margin-bottom: 10px;">
+                <img src="https://www.colliniatomi.it/pub/media/logo/default/logo-collini-389x89.png"
+                     style="max-width: 200px; mix-blend-mode: darken" alt="">
+            </div>
+        </div>
+    </section>
+    <section id="product">
+        <div class="container">
+            <div class="">
+                <div class="col-md-6 " style="display: inline-block;float: left; width: 30%;">
+                    <img src="<?php echo $image ?>" style="width:100%" alt="">
+                    <!--                    <img src="https://colliniatomi.loc/media/catalog/product/p/u/punzone_non_specifico.png" style="width:100%" alt="">-->
+                    <!--                    <img src="media/catalog/product/p/u/punzone_non_specifico.jpg" style="width:100%" alt="">-->
+                </div>
+
+                <div class="product-info"
+                     style="display: inline-block; float: left;  width: 70%; padding: 10px 20px; font-size: 14px;">
+
+                    <h1 class="product-title"
+                        style="font-weight: 100; font-size: 26px;"><?php echo $product->getName() ?></h1>
+                    <div class="price" style="color: goldenrod; font-size:18px"><?php echo __('Price') ?>:
+                        <strong><?php echo round($price + ($price * 0.22), 2) ?> € </strong></div>
+                    <div class="price" style=""><?php echo __('Excl. Tax') ?>: <?php echo round($price, 2) ?>€
+                    </div>
+                    <div class="sku">Sku: <?php echo $product->getSku() ?></div>
+
+                    <div>
+                        <? ?>
+                    </div>
+
+                    <span class="short-description py-3 d-block">
+                            <?php echo $product->getShortDescription() ?>
+                        </span>
+
+                </div>
+            </div>
+        </div>
+        <div class="container" style="width: 100%; clear:both;">
+
+            <h3 style="font-weight: 100"><?php echo __('Details') ?>:</h3>
+            <span style="margin-bottom: 10px; border-bottom: 1px solid gray; display: block; width: 100%; margin-top: -10px;"></span>
+
+            <div class="main-description" style="font-size: 12px;">
+                <?php echo $product->getDescription() ?>
+            </div>
+
+
+            <?php if (!empty($info1)):?>
+                <h3 style="font-weight: 100"><?php echo __('More information') ?>:</h3>
+                <span style="margin-bottom: 10px; border-bottom: 1px solid gray; display: block; width: 100%; margin-top: -10px;"></span>
+
+                <div class="main-description" style="font-size: 12px;">
+                    <?php echo $info1 ?>
+                </div>
+
+                <?php if(!empty($info2)): ?>
+                    <div class="main-description" style="font-size: 12px;">
+                        <?php echo $info2 ?>
+                    </div>
+                <?php endif;?>
+
+            <?php endif;?>
+
+        </div>
+    </section>
+</main>
+<footer style="position:fixed; bottom: 0; left: 0; width: 100%; border-top:1px solid gray; padding: 10px; text-align:center; font-size:10px;">
+    <?php
+    echo $this->getLayout()
+        ->createBlock('Magento\Cms\Block\Block')
+        ->setBlockId('pdf_footer')
+        ->toHtml();
+    ?>
+
+</footer>
+</body>

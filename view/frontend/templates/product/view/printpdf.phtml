@@ -1,0 +1,18 @@
+<?php
+/**
+ * Product view template
+ *
+ * @see \Magento\Catalog\Block\Product\View
+ */
+?>
+<?php
+$_product = $block->getProduct();
+$pdfUrl = $block->getUrl('printer/pdf/generate/') . $_product->getId();
+
+?>
+<div class="download-pdf">
+    <a href="<?php echo $pdfUrl; ?>" target="_blank" rel="nofollow">
+        <i class="icon-pdf"></i>
+        <span><?php echo __('PDF PRINT') ?></span>
+    </a>
+</div>
