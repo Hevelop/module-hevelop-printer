@@ -6,6 +6,11 @@ $product = $block->getProduct();
 
 $image = $block->getProductImageSrc($product);
 $price = $product->getData('price');
+$priceExclTax = $this->helper('Magento\Framework\Pricing\Helper\Data')->currency(number_format($price,2),true,false);
+$priceInclTax = $this->helper('Magento\Framework\Pricing\Helper\Data')->currency(number_format($price + ($price * 0.22),2),true,false);
+
+
+//die($price);
 
 $info1 = $product->getData('infoaggiuntive1');
 $info2 = $product->getData('infoaggiuntive2');
@@ -74,8 +79,8 @@ $info2 = $product->getData('infoaggiuntive2');
                     <h1 class="product-title"
                         style="font-weight: 100; font-size: 26px;"><?php echo $product->getName() ?></h1>
                     <div class="price" style="color: goldenrod; font-size:18px"><?php echo __('Price') ?>:
-                        <strong><?php echo round($price + ($price * 0.22), 2) ?> € </strong></div>
-                    <div class="price" style=""><?php echo __('Excl. Tax') ?>: <?php echo round($price, 2) ?>€
+                        <strong><?php echo $priceInclTax ?></strong></div>
+                    <div class="price" style=""><?php echo __('Excl. Tax') ?>: <?php echo $priceExclTax ?>
                     </div>
                     <div class="sku">Sku: <?php echo $product->getSku() ?></div>
 
